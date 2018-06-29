@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Hero } from '../hero';
 
 //Always need to import the Component symbol from the core angular library
 //@Component is the decorator function
@@ -11,7 +12,10 @@ import { Component, OnInit } from '@angular/core';
 })
 
 export class HeroesComponent implements OnInit {
-  hero = 'Windstrom';
+  hero: Hero = {
+    id: 1,
+  	name: 'Windstrom'
+  };	
   constructor() { }
 
   ngOnInit() {
