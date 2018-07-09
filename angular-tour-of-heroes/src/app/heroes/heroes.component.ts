@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+
 import { Hero } from '../hero';
-import { HEROES } from '../mock-heroes';
+import { HeroService } from '../hero.service';
 
 //Always need to import the Component symbol from the core angular library
 //@Component is the decorator function
@@ -15,15 +16,21 @@ import { HEROES } from '../mock-heroes';
 export class HeroesComponent implements OnInit {
  
   selectedHero: Hero;
-  heroes = HEROES;
-  onSelect(hero: Hero) : void {
-  		this.selectedHero = hero;
-  }
 
+  heroes: Hero[];
 
-  constructor() { }
+  constructor(private heroService: HeroService) { }
 
   ngOnInit() {
+    this.getHeroes();
   }
 
+  onSelect(hero: Hero): void {
+    this.selectedHero = hero;
+  }
+
+  getHeroes(): void {
+    this.heroService.getHeroes()
+        .subscribe(heroes => this.heroes = heroes);
+  }
 }
